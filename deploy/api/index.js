@@ -12,7 +12,7 @@ const corsOptions = {
   exposedHeaders: 'Authorization',
 };
 
-const PORT = 443;
+const PORT = process.env.PORT || 80; // Use environment variable or default to 80
 
 app.use(cors(corsOptions));
 app.use(express.json());

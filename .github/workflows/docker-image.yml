@@ -1,13 +1,13 @@
+
 name: Build and publish
 
 on:
   push:
     branches:
       - main
-
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: cnamweb/cnamApp
+  IMAGE_NAME: emmamau/nodejsSansBDD
 
 jobs:
   build-and-publish:
@@ -47,7 +47,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=true
             type=sha
 
       - name: Build and push Docker image
@@ -60,9 +60,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Deploy on render.com
-        # Only run this step if the branch is main
-        if: github.ref == 'refs/heads/main'
         env:
-          deploy_url: ${{ secrets.RENDER }}
+          deploy_url: ${{ secrets.NODEJS }}
         run: |
           curl "$deploy_url"

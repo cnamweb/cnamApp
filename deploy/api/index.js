@@ -6,13 +6,13 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:443",
+  origin: "*",
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   headers: 'Content-Type, Authorization',
   exposedHeaders: 'Authorization',
 };
 
-const PORT = process.env.PORT || 80; // Use environment variable or default to 80
+const PORT = 443;
 
 app.use(cors(corsOptions));
 app.use(express.json());
